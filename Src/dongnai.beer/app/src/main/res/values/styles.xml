@@ -1,0 +1,38 @@
+<resources >
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.CustomSpinner">
+        <item name="android:spinnerMode">dialog</item>
+        <item name="android:textColor">@color/spinnerTextColor</item>
+        <item name="android:background">@drawable/spinner_bg</item>
+    </style>
+    <style name="AppTheme.ButtonImage">
+        <item name="android:layout_marginLeft">1dp</item>
+        <item name="android:src">@drawable/search_16</item>
+        <item name="android:background">@color/imgButtonColor</item>
+    </style>
+   <!-- <style name="AppTheme.CustomTab">
+        <item name="app:tabMode">fixed</item>
+        <item name="app:tabGravity">center</item>
+        <item name="app:tabBackground">@drawable/tab_header_bg</item>
+        <item name="app:tabPaddingStart">@dimen/custom_tab_padding</item>
+        <item name="app:tabPaddingEnd">@dimen/custom_tab_padding</item>
+        <item name="app:tabMaxWidth">100dp</item>
+        <item name="app:tabMinWidth">50dp</item>
+    </style>-->
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="user_choices">
+        <item>Quán hot</item>
+        <item>Bạn nhậu</item>
+        <item>Xem độ nhậu</item>
+    </string-array>
+
+</resources>

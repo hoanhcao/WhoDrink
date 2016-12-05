@@ -1,0 +1,12 @@
+Decreate margin between tab and barlayout(done)
+Create database(done)
+
+Implement webservice for testing
+	+ Create sample service(done)
+	+ Try connect to service from android app.
+
+Create Hot Restaurant
+	+ Research google map in android
+	+ Design find around us
+Implement animation after user click on spinner
+Design Spinner Item

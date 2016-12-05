@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="WhoDrink" Class="WhoDrinkContextDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=172.27.39.211;Initial Catalog=WhoDrink;Persist Security Info=True;User ID=sa" SettingsObjectName="whodrink.dal.Properties.Settings" SettingsPropertyName="WhoDrinkConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Club" Member="Clubs">
+    <Type Name="Club">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Coordinate" Type="System.String" DbType="VarChar(25)" CanBeNull="true" />
+      <Column Name="OwnerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="LocationId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Club_Drinker" Member="Drinkers" ThisKey="Id" OtherKey="ClubId" Type="Drinker" />
+      <Association Name="Drinker_Club" Member="Drinker" ThisKey="OwnerId" OtherKey="Id" Type="Drinker" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ReviewCardMedia" Member="ReviewCardMedias">
+    <Type Name="ReviewCardMedia">
+      <Column Name="ReviewCardId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="MediaObjectId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="MediaObject_ReviewCardMedia" Member="MediaObject" ThisKey="MediaObjectId" OtherKey="Id" Type="MediaObject" IsForeignKey="true" />
+      <Association Name="ReviewCard_ReviewCardMedia" Member="ReviewCard" ThisKey="ReviewCardId" OtherKey="Id" Type="ReviewCard" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Drinker" Member="Drinkers">
+    <Type Name="Drinker">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="NickName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Avatar" Type="System.Data.Linq.Binary" DbType="Binary(1)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="LevelId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="IsDeleted" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="LocationId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ClubId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Drinker_Club" Member="Clubs" ThisKey="Id" OtherKey="OwnerId" Type="Club" />
+      <Association Name="Drinker_InviteLetter" Member="InviteLetters" ThisKey="Id" OtherKey="DrinkerId" Type="InviteLetter" />
+      <Association Name="Drinker_ReviewCard" Member="ReviewCards" ThisKey="Id" OtherKey="OwnerId" Type="ReviewCard" />
+      <Association Name="Club_Drinker" Member="Club" ThisKey="ClubId" OtherKey="Id" Type="Club" IsForeignKey="true" />
+      <Association Name="DrinkLevel_Drinker" Member="DrinkLevel" ThisKey="LevelId" OtherKey="Id" Type="DrinkLevel" IsForeignKey="true" />
+      <Association Name="Location_Drinker" Member="Location" ThisKey="LocationId" OtherKey="Id" Type="Location" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DrinkLevel" Member="DrinkLevels">
+    <Type Name="DrinkLevel">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
+      <Association Name="DrinkLevel_Drinker" Member="Drinkers" ThisKey="Id" OtherKey="LevelId" Type="Drinker" />
+    </Type>
+  </Table>
+  <Table Name="dbo.InviteLetter" Member="InviteLetters">
+    <Type Name="InviteLetter">
+      <Column Name="DrinkerId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="PartyId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="InvitedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="JoinedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsEnd" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Drinker_InviteLetter" Member="Drinker" ThisKey="DrinkerId" OtherKey="Id" Type="Drinker" IsForeignKey="true" />
+      <Association Name="Party_InviteLetter" Member="Party" ThisKey="PartyId" OtherKey="Id" Type="Party" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Location" Member="Locations">
+    <Type Name="Location">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Coordinate" Type="System.String" DbType="Char(25) NOT NULL" CanBeNull="false" />
+      <Column Name="ParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Location_Drinker" Member="Drinkers" ThisKey="Id" OtherKey="LocationId" Type="Drinker" />
+      <Association Name="Location_Location" Member="Locations" ThisKey="Id" OtherKey="ParentId" Type="Location" />
+      <Association Name="Location_Restaurant" Member="Restaurants" ThisKey="Id" OtherKey="LocationId" Type="Restaurant" />
+      <Association Name="Location_Location" Member="Location1" ThisKey="ParentId" OtherKey="Id" Type="Location" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MediaObject" Member="MediaObjects">
+    <Type Name="MediaObject">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Extension" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Association Name="MediaObject_ReviewCardMedia" Member="ReviewCardMedias" ThisKey="Id" OtherKey="MediaObjectId" Type="ReviewCardMedia" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Menu" Member="Menus">
+    <Type Name="Menu">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="StandardPrice" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" CanBeNull="false" />
+      <Column Name="PartyId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="MediaObjId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="Party_Menu" Member="Party" ThisKey="PartyId" OtherKey="Id" Type="Party" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Party" Member="Parties">
+    <Type Name="Party">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="OwnerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="LimitNumber" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="MenuId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Party_InviteLetter" Member="InviteLetters" ThisKey="Id" OtherKey="PartyId" Type="InviteLetter" />
+      <Association Name="Party_Menu" Member="Menus" ThisKey="Id" OtherKey="PartyId" Type="Menu" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Restaurant" Member="Restaurants">
+    <Type Name="Restaurant">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(500) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Coordinate" Type="System.String" DbType="Char(25) NOT NULL" CanBeNull="false" />
+      <Column Name="LocationId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Location_Restaurant" Member="Location" ThisKey="LocationId" OtherKey="Id" Type="Location" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ReviewCard" Member="ReviewCards">
+    <Type Name="ReviewCard">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OwnerId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CartType" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="LongDescription" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="UpdatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="ReviewCard_ReviewCardMedia" Member="ReviewCardMedias" ThisKey="Id" OtherKey="ReviewCardId" Type="ReviewCardMedia" />
+      <Association Name="Drinker_ReviewCard" Member="Drinker" ThisKey="OwnerId" OtherKey="Id" Type="Drinker" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
