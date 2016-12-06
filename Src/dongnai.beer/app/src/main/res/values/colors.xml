@@ -6,5 +6,6 @@
     <color name="colorSpinner">#FFFFFF</color>
     <color name="spinnerTextColor">#808080</color>
     <color name="imgButtonColor">#FFFFFF</color>
-    
+    <color name="colorTextTitle">#FE980F</color>
+    <color name="colorTextDesc">#F5F5ED</color>
 </resources>

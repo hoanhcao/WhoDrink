@@ -16,8 +16,8 @@ import com.google.android.gms.maps.MapView;
 
 public class DrinkGroupFragment extends Fragment {
     private WhoDrinkApp myApp;
-    private GoogleMap googleMap;
-    MapView mMapView;
+//    private GoogleMap googleMap;
+//    MapView mMapView;
 
     public DrinkGroupFragment() {
         MainActivity myActivity = (MainActivity) getActivity();

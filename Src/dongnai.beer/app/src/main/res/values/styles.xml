@@ -26,6 +26,22 @@
         <item name="android:src">@drawable/search_16</item>
         <item name="android:background">@color/imgButtonColor</item>
     </style>
+    <style name="AppTheme.RestaurantLayout">
+        <item name="android:background">@drawable/restaurant_item_bg</item>
+    </style>
+    <style name="AppTheme.RestaurantLayout.TitleText">
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_alignParentStart">true</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/colorTextTitle</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_centerHorizontal">true</item>
+    </style>
+    <style name="AppTheme.RestaurantLayout.DescText">
+        <item name="android:foreground">@color/colorTextDesc</item>
+    </style>
    <!-- <style name="AppTheme.CustomTab">
         <item name="app:tabMode">fixed</item>
         <item name="app:tabGravity">center</item>
